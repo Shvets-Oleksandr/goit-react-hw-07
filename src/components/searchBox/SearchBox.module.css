@@ -1,0 +1,9 @@
+.searchWrapper {
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+
+.searchWrapper > input {
+  box-sizing: border-box;
+  width: 100%;
+}
