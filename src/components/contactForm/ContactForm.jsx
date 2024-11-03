@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-import { nanoid } from 'nanoid';
 import * as yup from 'yup';
 
-// import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 
 import css from './ContactForm.module.css';
 
@@ -19,8 +18,8 @@ const ContactFormSchema = yup.object({
     .max(50, 'Too Long!')
     .required('Required')
     .matches(
-      /^[(]?[0-9]{3}[)]?[-]?[0-9]{2}[-]?[0-9]{2}$/,
-      'Phone must be XXX-XX-XX'
+      /^[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}$/,
+      'Phone must be XXX-XXX-XXXX'
     ),
 });
 
@@ -28,8 +27,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    const newContact = { ...values, id: nanoid() };
-    dispatch(addContact(newContact));
+    dispatch(addContact(values));
     actions.resetForm();
   };
 
